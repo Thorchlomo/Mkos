@@ -18,7 +18,7 @@ while true do
 	print("Got a message from " .. from .. " on port " .. portused .. ": " .. messageR)
 	if string.match(messageR, ".") then 
 		print("This message appear be an session asking, consider it is")
-		sessionName = string.sub(messageR,0,string.sub(string.find(messageR, "."), 0, 0))
+		sessionName = string.sub(messageR,0, tonumber(string.sub(string.find(messageR, "."), 0, 0)))
 		print("Session Name : " .. sessionName)
 	end
 end
