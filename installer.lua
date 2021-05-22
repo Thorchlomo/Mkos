@@ -17,4 +17,4 @@ if file_exist("/bin/session.lua") then
 	end
 
 print("Removed all old file, downloading new")
-os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/main/bin/session.lua?token=ARPS2KWSJJWNQSHXOP2J7C3AVDZMW")
+os.execute("wget -P /bin https://raw.githubusercontent.com/Thorchlomo/Mkos/main/bin/session.lua?token=ARPS2KWSJJWNQSHXOP2J7C3AVDZMW")
