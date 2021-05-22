@@ -7,6 +7,7 @@ function file_exist(file)
 	else
 		return false
 	end
+end
 
 
 print("Removing old version if they exist")
