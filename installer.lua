@@ -12,7 +12,7 @@ end
 
 print("Removing old version if they exist")
 if file_exist("/bin/session.lua") then 
-	os.remove("/bin/session.lua")
+	os.execute("rm /bin/session.lua")
 	print("removed session.lua")
 	end
 
