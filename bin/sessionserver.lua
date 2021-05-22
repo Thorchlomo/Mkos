@@ -9,7 +9,7 @@ print("Session system by thorchlomo")
 print("Initializating Session Server")
 
 m.open(port) --Use of 1441 port
-io.stderr:write("Openned port 1441 :" m.isOpen(port))
+io.stderr:write("Openned port 1441 :" ..tostring( m.isOpen(port)))
 
 
 while true do
@@ -18,7 +18,7 @@ while true do
 	print("Got a message from " .. from .. " on port " .. portused .. ": " .. messageR)
 	if string.match(messageR, ".") then 
 		print("This message appear be an session asking, consider it is")
-		sessionName = string.sub(0,string.sub(string.find(messageR, "."), 0, 0)
+		sessionName = string.sub(messageR,0,string.sub(string.find(messageR, "."), 0, 0))
 		print("Session Name : " .. sessionName)
 	end
 end
