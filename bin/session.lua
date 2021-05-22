@@ -1,0 +1,1 @@
+io.stderr:write("Session system by thorchlomo")
