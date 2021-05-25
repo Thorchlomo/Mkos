@@ -1,4 +1,4 @@
-io.stderr:write("Session system by thorchlomo")
+io.write("Session system by thorchlomo\n")
 
 local session_host = nil --This is the adress of the session server, must be seted before use
 
