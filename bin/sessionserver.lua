@@ -21,11 +21,15 @@ while true do
 	if message == "session" then
 		table.insert(onRoadCom, from)
 		print(from .. " Added to onRoadCom !")
+		print("nilling")
 		from = nil
+		print("nilled")
 		while from ~= onRoadCom[1] do
+			print(from .. "1")
 			local _, _, from, portused, _, message = event.pull("modem_message")
 			pseudo = message
 			m.send(from, portused, "The session server is curently used, try later")
+			print(from)
 		end
 
 		while from ~= onRoadCom[1] do
