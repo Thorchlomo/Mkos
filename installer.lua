@@ -22,6 +22,13 @@ if file_exist("/bin/sessionserver.lua") then
 	print("removed sessionserver.lua")
 	end
 
+-- Replace the tips
+if file_exist("/usr/misc/greetings.txt") then 
+	os.execute("rm /usr/misc/greetings.txt")
+	print("removed greetings.txt")
+	end
+
 print("Removed all old file, downloading new")
 os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/main/bin/session.lua /bin/session.lua")
 os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/main/bin/sessionserver.lua /bin/sessionserver.lua")
+os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/main/usr/misc/greetings.txt /usr/misc/greetings.txt")
