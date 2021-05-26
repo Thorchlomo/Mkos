@@ -32,13 +32,14 @@ function sendFile(pseudo, to)
 	end
 	print("[sendFile]: file scanned, now lets send that !")
 	for index, value in ipairs(files) do
-		if string.match(fileToRead, ".") == false then
-			print("[readFile]: not a file !")
-		else
+		if string.match(fileToRead, ".") then
 			m.send(to, port, files[index])
 			os.sleep(0.1)
 			local content = readFile(files[index])
 			m.send(to, port, content)
+			
+		else
+			print("[readFile]: not a file !")
 		end
 	end
 	print("[sendFile]: Finishing !")
