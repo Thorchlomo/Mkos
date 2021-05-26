@@ -62,7 +62,6 @@ while true do
 
 		local _, _, from, portused, _, message = event.pull("modem_message")
 		password = message
-		m.send(from, portused, "The session server is curently used, try later")
 		print("finito !")
 		curentid = pseudo .. "." .. password
 		for index, value in ipairs(account) do
