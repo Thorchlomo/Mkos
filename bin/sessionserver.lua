@@ -30,6 +30,7 @@ while true do
 		password = message
 		m.send(from, portused, "The session server is curently used, try later")
 		print("finito !")
+		print(pseudo .. "." .. password)
 		for value, index in ipairs(account) do
 			if account[index] == pseudo .. "." .. password then 
 				print("I've found an identification ! : " .. account[index])
