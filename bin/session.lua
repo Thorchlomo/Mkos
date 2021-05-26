@@ -36,4 +36,13 @@ m.send(session_host, port, args[2])
 while true do 
 	local _, _, from, portused, _, message = event.pull("modem_message")
 	print(message)
+	if message == "1441/ended" then
+		os.exit()
+	else
+		local fileWrite = io.open(message, "wb")
+		local _, _, from, portused, _, message = event.pull("modem_message")
+		fileWrite:write(message)
+		fileWrite:close()
+
+	end
 end

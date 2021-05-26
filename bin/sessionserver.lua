@@ -18,7 +18,7 @@ function readFile(fileToRead)
 	
 	print("[readFile]: reading ")
 	print(fileToRead)
-	local file = open(fileToRead, "rb") -- r read mode and b binary mode
+	local file = io.open(fileToRead, "rb") -- r read mode and b binary mode
     local content = file:read "*a" -- *a or *all reads the whole file
     file:close()
     return content
