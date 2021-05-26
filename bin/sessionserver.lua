@@ -32,7 +32,7 @@ while true do
 		print("finito !")
 		curentid = pseudo .. "." .. password
 		for value, index in ipairs(account) do
-			if account[index] == pseudo .. "." .. password then 
+			if account[index] == curentid then 
 				print("I've found an identification ! : " .. account[index])
 			else 
 				print("Not that one")
