@@ -15,7 +15,9 @@ m.open(port) --Use of 1441 port
 io.stderr:write("Openned port 1441 :" ..tostring( m.isOpen(port)))
 
 function readFile(fileToRead)
-	print("[readFile]: reading " .. file)
+	
+	print("[readFile]: reading ")
+	print(file)
 	local file = open(fileToRead, "rb") -- r read mode and b binary mode
     local content = file:read "*a" -- *a or *all reads the whole file
     file:close()
@@ -30,10 +32,14 @@ function sendFile(pseudo, to)
 	end
 	print("[sendFile]: file scanned, now lets send that !")
 	for index, value in ipairs(files) do
-		m.send(to, port, files[index])
-		os.sleep(0.1)
-		local content = readFile(files[index])
-		m.send(to, port, content)
+		if string.match(fileToRead, ".") === false then
+			print("[readFile]: not a file !")
+		else
+			m.send(to, port, files[index])
+			os.sleep(0.1)
+			local content = readFile(files[index])
+			m.send(to, port, content)
+		end
 	end
 	print("[sendFile]: Finishing !")
 	m.send(to, port, "1441/ended")
