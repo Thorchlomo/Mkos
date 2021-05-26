@@ -32,3 +32,8 @@ m.send(session_host, port, "session")
 os.sleep(4)
 m.send(session_host, port, args[1])
 m.send(session_host, port, args[2])
+
+while true do 
+	local _, _, from, portused, _, message = event.pull("modem_message")
+	print(message)
+end
