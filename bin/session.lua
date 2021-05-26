@@ -29,5 +29,6 @@ m.open(port) --Use of 1441 port
 
 io.stderr:write("Openned port 1441 :" ..tostring( m.isOpen(port)))
 m.send(session_host, port, "session")
+os.sleep(4)
 m.send(session_host, port, args[2])
 m.send(session_host, port, args[3])

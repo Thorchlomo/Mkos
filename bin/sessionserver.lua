@@ -21,7 +21,7 @@ while true do
 	if message == "session" then
 		table.insert(onRoadCom, from)
 		print(from .. " Added to onRoadCom !")
-		local _, _, from, portused, _, message = event.pull("modem_message_2")
+		local _, _, from, portused, _, message = event.pull("modem_message")
 		pseudo = message
 		print(pseudo)
 
