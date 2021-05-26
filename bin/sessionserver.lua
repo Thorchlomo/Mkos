@@ -31,7 +31,7 @@ while true do
 		m.send(from, portused, "The session server is curently used, try later")
 		print("finito !")
 		curentid = pseudo .. "." .. password
-		for value, index in ipairs(account) do
+		for index, value in ipairs(account) do
 			print(account[index])
 			print(curentid)
 			if account[index] == curentid then 
