@@ -32,7 +32,7 @@ function sendFile(pseudo, to)
 	end
 	print("[sendFile]: file scanned, now lets send that !")
 	for index, value in ipairs(files) do
-		if string.match(fileToRead, ".") === false then
+		if string.match(fileToRead, ".") == false then
 			print("[readFile]: not a file !")
 		else
 			m.send(to, port, files[index])
