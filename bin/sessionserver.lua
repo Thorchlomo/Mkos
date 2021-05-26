@@ -19,17 +19,17 @@ while true do
 	messageR = tostring(message)
 	print("Got a message from " .. from .. " on port " .. portused .. ": " .. messageR)
 	if message == "session" then
-		table.insert(onRoadCom, from)
-		print(from .. " Added to onRoadCom !")
+		--table.insert(onRoadCom, from)
+		--print(from .. " Added to onRoadCom !")
+		print("session !")
 		local _, _, from, portused, _, message = event.pull("modem_message")
 		pseudo = message
 		print(pseudo)
 
-		while from ~= onRoadCom[1] do
-			local _, _, from, portused, _, message = event.pull("modem_message")
-			password = message
-			m.send(from, portused, "The session server is curently used, try later")
-		end
+		local _, _, from, portused, _, message = event.pull("modem_message")
+		password = message
+		m.send(from, portused, "The session server is curently used, try later")
+		print("finito !")
 		for value, index in ipairs(account) do
 			if account[index] == pseudo .. "." .. password then 
 				print("I've found an identification ! : " .. account[index])
