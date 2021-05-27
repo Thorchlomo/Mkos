@@ -89,32 +89,40 @@ while true do
 					print("Not that one")
 				end
 			end
-		end
-		elseif message == "push" then
-			while true do 
-				_, _, from, portused, _, message = event.pull("modem_message")
-				print(message)
-				if message == "state:folder" then
-					state = "folder"
-				elseif message == "state:file" then
-					state = "file"
-					for index, value in ipairs(folders) do
-						os.execute("mkdir " .. folders[index])
-						print("synchronize : " .. folders[index])
-					end
-				elseif message == "1441/ended" then
-					break
-				else
-					if state == "folder" then
-						table.insert(folders,message)
-					end
-					if state == "file" then
-						fileWrite = io.open(message, "wb")
-						local _, _, from, portused, _, message = event.pull("modem_message")
-						fileWrite:write(message)
-						fileWrite:close()
+		elseif message == "push" then	--Identification
+		for index, value in ipairs(account) do
+			print(account[index])
+			print(curentid)
+			if account[index] == curentid then 
+				print("I've found an identification ! : " .. account[index])
+				while true do 
+					_, _, from, portused, _, message = event.pull("modem_message")
+					print(message)
+					if message == "state:folder" then
+						state = "folder"
+					elseif message == "state:file" then
+						state = "file"
+						for index, value in ipairs(folders) do
+							os.execute("mkdir " .. folders[index])
+							print("synchronize : " .. folders[index])
+						end
+					elseif message == "1441/ended" then
+						break
+					else
+						if state == "folder" then
+							table.insert(folders,message)
+						end
+						if state == "file" then
+							fileWrite = io.open(message, "wb")
+							local _, _, from, portused, _, message = event.pull("modem_message")
+							fileWrite:write(message)
+							fileWrite:close()
+						end
 					end
 				end
+				print("sended files, finish for that one !")
+			else 
+				print("Not that one")
 			end
 		end
 	end

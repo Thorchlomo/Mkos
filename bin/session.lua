@@ -110,7 +110,6 @@ if args[3] == "-g" then
 elseif args[3] == "p" then
 	sendFile(args[1], session_host)
 	print("sended files, finish for that one !")
-	end
 end
 
 -- Theorie pour le bug : file ne peut pas creer de subfolder, il faut les créer à la main  : Vrai !
