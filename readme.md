@@ -1,18 +1,11 @@
 ﻿Mkos, an OpenOS version that integrate session
-
+==
 Session Fonctonement :  
 1 session server, who host file  
 infinite (or near) session client (just computer with session.lua command)  
 
 
-When session file download needed :
-`
- -The client ask for server "sessionname.sessionpassword"  
- -The server respond "sessionok"  
- -The server send "session tree " (file (wait for client confirmation), file (wait), ...)  
- -The server send file in order of apparence in session tree  
- -The server cut the link  
- `  
+
 -How to create session ?  
   
 To create a session, type `edit /bin/sessionserver.lua` and modify the `local account = {"test.1234"}	--Todo : Find a more secure way to stock that` line to 

@@ -1,3 +1,5 @@
+local account = {"test.1234"}	--Todo : Find a more secure way to stock that
+
 local component = require("component")
 local event = require("event")
 local m = component.modem
@@ -7,7 +9,6 @@ local onRoadCom = {}
 local files = {}
 local folders = {}
 
-local account = {"test.1234"}	--Todo : Find a more secure way to stock that
 
 print("Session system by thorchlomo")
 print("Initializating Session Server")
