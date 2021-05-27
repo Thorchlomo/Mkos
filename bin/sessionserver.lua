@@ -25,7 +25,17 @@ function readFile(fileToRead)
 end
 
 function sendFile(pseudo, to)
-	local p = io.popen('find "'.. '/home/' .. pseudo ..'"')  --Open directory look for files     
+	print("[sendFile]: send folder status !")
+	m.send(to, port, "state:folder")
+	local q = io.popen('find "'.. '/home/' .. pseudo ..'" --type=d')
+	for directory in p:lines() do                         --Loop through all files
+		print(directory)       
+		m.send(to, port, directory)
+		os.sleep(0.1)
+	end
+	print("[sendFile]: send file status !")
+	m.send(to, port, "state:file")
+	local p = io.popen('find "'.. '/home/' .. pseudo ..'" --type=f')  --Open directory look for files     
 	for file in p:lines() do                         --Loop through all files
 		print(file)       
 		table.insert(files, file)
