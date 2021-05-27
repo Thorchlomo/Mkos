@@ -5,6 +5,7 @@ local m = component.modem
 local port = 1441
 local onRoadCom = {}
 local files = {}
+local folders = {}
 
 local account = {"test.1234"}	--Todo : Find a more secure way to stock that
 
@@ -126,4 +127,5 @@ while true do
 			end
 		end
 	end
+end
 end

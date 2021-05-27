@@ -80,7 +80,8 @@ m.send(session_host, port, "session")
 os.sleep(4)
 m.send(session_host, port, args[1])
 m.send(session_host, port, args[2])
-if args[3] == "-g" then
+if args[3] == "g" then
+	m.send(session_host, port, "get")
 	while true do 
 		_, _, from, portused, _, message = event.pull("modem_message")
 		print(message)
@@ -108,6 +109,7 @@ if args[3] == "-g" then
 		end
 	end
 elseif args[3] == "p" then
+	m.send(session_host, port, "push")
 	sendFile(args[1], session_host)
 	print("sended files, finish for that one !")
 end
