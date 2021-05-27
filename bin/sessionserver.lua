@@ -28,7 +28,7 @@ function sendFile(pseudo, to)
 	print("[sendFile]: send folder status !")
 	m.send(to, port, "state:folder")
 	local q = io.popen('find "'.. '/home/' .. pseudo ..'" --type=d')
-	for directory in p:lines() do                         --Loop through all files
+	for directory in q:lines() do                         --Loop through all files
 		print(directory)       
 		m.send(to, port, directory)
 		os.sleep(0.1)
@@ -74,16 +74,47 @@ while true do
 		password = message
 		print("finito !")
 		curentid = pseudo .. "." .. password
-		for index, value in ipairs(account) do
-			print(account[index])
-			print(curentid)
-			if account[index] == curentid then 
-				print("I've found an identification ! : " .. account[index])
-				print("Sending files")
-				sendFile(pseudo, from)
-				print("sended files, finish for that one !")
-			else 
-				print("Not that one")
+		print("waiting for mode !")
+		local _, _, from, portused, _, message = event.pull("modem_message")
+		if message == "get" then
+			for index, value in ipairs(account) do
+				print(account[index])
+				print(curentid)
+				if account[index] == curentid then 
+					print("I've found an identification ! : " .. account[index])
+					print("Sending files")
+					sendFile(pseudo, from)
+					print("sended files, finish for that one !")
+				else 
+					print("Not that one")
+				end
+			end
+		end
+		elseif message == "push" then
+			while true do 
+				_, _, from, portused, _, message = event.pull("modem_message")
+				print(message)
+				if message == "state:folder" then
+					state = "folder"
+				elseif message == "state:file" then
+					state = "file"
+					for index, value in ipairs(folders) do
+						os.execute("mkdir " .. folders[index])
+						print("synchronize : " .. folders[index])
+					end
+				elseif message == "1441/ended" then
+					break
+				else
+					if state == "folder" then
+						table.insert(folders,message)
+					end
+					if state == "file" then
+						fileWrite = io.open(message, "wb")
+						local _, _, from, portused, _, message = event.pull("modem_message")
+						fileWrite:write(message)
+						fileWrite:close()
+					end
+				end
 			end
 		end
 	end
