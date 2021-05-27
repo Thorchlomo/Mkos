@@ -83,7 +83,6 @@ m.send(session_host, port, args[2])
 if args[3] == "g" then
 	m.send(session_host, port, "get")
 	while true do 
-		m.send(session_host, port, "get")
 		_, _, from, portused, _, message = event.pull("modem_message")
 		print(message)
 		if message == "state:folder" then
