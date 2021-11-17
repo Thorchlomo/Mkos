@@ -1,6 +1,7 @@
 local indev = false
+local args, options = shell.parse(...)
 
-if arg[1] == "--indev" then
+if args[1] == "--indev" then
 	indev = true
 	end
 
