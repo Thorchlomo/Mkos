@@ -4,6 +4,8 @@ local m = component.modem
 
 local port = 1441
 
+
+
 io.write("Session system by thorchlomo\n")
 -- Dev modem id : f71798c6-bec5-4d00-b8cf-a4e5ef26ccac
 local session_host =  "f71798c6-bec5-4d00-b8cf-a4e5ef26ccac" --This is the adress of the session server, must be seted before use
@@ -28,6 +30,12 @@ if #args < 3 then
 	return
 end
 
+
+io.write("Are-you sure you want to do that, you will scratch some unsaved data ? (type no if no ;) )")
+local sure = io.read()
+if sure == "no" then
+	os.exit()
+end
 
 -- This function is re-used from sessionserver
 function readFile(fileToRead)
