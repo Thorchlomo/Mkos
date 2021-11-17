@@ -1,7 +1,8 @@
 local indev = false
 local args, options = shell.parse(...)
 
-if args[1] == "--indev" then
+if options[2] == "i" then
+	print("indev download ...")
 	indev = true
 	end
 
@@ -49,8 +50,8 @@ if indev == false then
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/main/bin/mkapt.lua /bin/mkapt.lua")
 	
 else 
-	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo_indev/bin/session.lua /bin/session.lua")
-	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo_indev/bin/sessionserver.lua /bin/sessionserver.lua")
-	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo_indev/usr/misc/greetings.txt /usr/misc/greetings.txt")
-	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo_indev/bin/mkapt.lua /bin/mkapt.lua")
+	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo-indev/bin/session.lua /bin/session.lua")
+	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo-indev/bin/sessionserver.lua /bin/sessionserver.lua")
+	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo-indev/usr/misc/greetings.txt /usr/misc/greetings.txt")
+	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo-indev/bin/mkapt.lua /bin/mkapt.lua")
 	end
