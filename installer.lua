@@ -46,9 +46,10 @@ if indev == false then
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/main/bin/sessionserver.lua /bin/sessionserver.lua")
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/main/usr/misc/greetings.txt /usr/misc/greetings.txt")
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/main/bin/mkapt.lua /bin/mkapt.lua")
-	end
+	
 else 
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo_indev/bin/session.lua /bin/session.lua")
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo_indev/bin/sessionserver.lua /bin/sessionserver.lua")
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo_indev/usr/misc/greetings.txt /usr/misc/greetings.txt")
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo_indev/bin/mkapt.lua /bin/mkapt.lua")
+	end
