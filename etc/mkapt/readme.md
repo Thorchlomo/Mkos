@@ -9,3 +9,4 @@ Mkapt folder is an folder where all "official" mkapt package are stored it's sup
   *src
    *src (if needed)
   *installer.lua
+ *etc...
