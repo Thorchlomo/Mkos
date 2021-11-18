@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\bin"
+    "\\bin",
+    "\\etc",
+    "\\etc\\mkapt"
   ],
-  "SelectedNode": "\\readme.md",
+  "SelectedNode": "\\bin\\mkapt.lua",
   "PreviewInSolutionExplorer": false
 }
