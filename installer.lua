@@ -55,3 +55,6 @@ else
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo-indev/usr/misc/greetings.txt /usr/misc/greetings.txt")
 	os.execute("wget https://raw.githubusercontent.com/Thorchlomo/Mkos/thorchlomo-indev/bin/mkapt.lua /bin/mkapt.lua")
 	end
+
+print("creating mkapt folder in /etc")
+os.execute("mkdir /etc/mkapt")
