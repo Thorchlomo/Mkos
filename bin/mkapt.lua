@@ -1,6 +1,5 @@
 local component = require("component")
 local internet = require("internet")
-local inspect = require("inspect")
 local shell = require("shell")
 
 local args, options = shell.parse(...) -- Récuperation des arguments et des options
@@ -22,9 +21,9 @@ end
 
 if args[1] == "get" then -- The user want to recover an packet from packet server
 	local packet = args[2]
-	print("Looking for packet : "packet)
+	print("Looking for packet : ",packet)
  
-	local handle = internet.request("https://raw.githubusercontent.com/Thorchlomo/Mkos/main/etc/mkapt/somepacket")
+	local handle = internet.request("https://raw.githubusercontent.com/Thorchlomo/Mkos/main/etc/mkapt")
 	local result = ""
 	local mt = getmetatable(handle)
  
