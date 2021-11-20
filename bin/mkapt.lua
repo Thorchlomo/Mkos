@@ -1,3 +1,4 @@
+local filesystem = require("filesystem")
 local component = require("component")
 local internet = require("internet")
 local shell = require("shell")
@@ -20,7 +21,20 @@ if #args < 2 then
   return
 end
 
+-- Start of the "main" code
+function read_source()
+	local config = {}
+	local p = io.popen('find "/etc/mkapt/" --type=f')  --Open directory look for files     
+	for file in p:lines() do                         --Loop through all files
+		print(file)       
+		table.insert(config, file)
+	end
+	return config
+
+end
+
 if args[1] == "get" then -- The user want to recover an packet from packet server
+	os.execute("mkdir /etc/mkapt/"..args[2])
 	os.execute("wget https://github.com/Thorchlomo/Mkos/blob/main/etc/mkapt/"..args[2].."/installer.lua -f /etc/mkapt/"..args[2].."/installer.lua")
 	local installer = require("/etc/mkapt/"..args[2].."/installer.lua")
 	print(installer.ver())
@@ -30,4 +44,8 @@ if args[1] == "update" then
 	print("Updating package list for the following source :",args[2])
 	os.setenv("/etc/mkapt")
 	os.execute("wget "..args[2].." -f")
+end
+
+if args[1] == "debug" then
+	read_source()
 end
