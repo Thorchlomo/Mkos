@@ -64,7 +64,7 @@ function upgrade(packet)
 	if installer.version() == version then
 		print("Packet already up-to-date")
 	else
-		os.execute("wget "..source..name.."/installer.lua -f /etc/mkapt/"..name.."/installer.lua")
+		os.execute("wget "..source.."/"..name.."/installer.lua -f /etc/mkapt/"..name.."/installer.lua")
 		installer = require("/etc/mkapt/"..name.."/installer.lua")
 		print(installer.update())
 	end
