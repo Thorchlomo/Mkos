@@ -73,7 +73,7 @@ end
 if args[1] == "get" then -- The user want to recover an packet from packet server
 	local source,name,version = read_source(args[2])
 	os.execute("mkdir /etc/mkapt/"..name)
-	os.execute("wget "..source..name.."/installer.lua -f /etc/mkapt/"..name.."/installer.lua")
+	os.execute("wget "..source.."/"..name.."/installer.lua -f /etc/mkapt/"..name.."/installer.lua")
 	local installer = require("/etc/mkapt/"..name.."/installer.lua")
 	print(installer.ver())
 	print(installer.install())
