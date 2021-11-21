@@ -6,12 +6,13 @@ local shell = require("shell")
 local args, options = shell.parse(...) -- Récuperation des arguments et des options
 
 if #args < 2 then	
-	io.write("Usage: mkatp <get/update/upgrade/add-src/remove-src> <packet/src-url>\n")
+	io.write("Usage: mkatp <get/update/upgrade/add-src/remove-src> <packet/src-url> [a_name_for_the_source_in_case_of_add/remove]\n")
 	io.write(" get : Used to download packet from all source server available.\n")
+	io.write(" remove : Used to remove packet from the computer.\n")
 	io.write(" update : Update the packet list.\n")
 	io.write(" upgrade : upgrade all the packet or the specified packet")
 	io.write(" add-src : Add an source server.\n")
-	io.write(" remove-src : Make the opposite.\n")
+	io.write(" remove-src : Make the opposite (put anything you want in src-url ;) ).\n")
 	io.write(" P.S. : This program require an internet card to work")
 	return
  end
@@ -43,14 +44,46 @@ function read_source(packet_query)
 			end
 		end
 	end
+	os.exit()
+end
+
+function get_all_packet()
+	local directorys = {}
+	local q = io.popen('find "/etc/mkapt" --type=d')
+	for directory in q:lines() do                         --Loop through all files
+		print(directory)
+		directorys[#directorys + 1] =  string.gsub(directory, "/etc/mkapt/", "")
+	end
+	return directorys
+end
+
+function upgrade(packet)
+	print("upgrading "..packet)
+	local source,name,version = read_source(packet)
+	local installer = require("/etc/mkapt/"..name.."/installer.lua")
+	if installer.version() == version then
+		print("Packet already up-to-date")
+	else
+		os.execute("wget "..source..name.."/installer.lua -f /etc/mkapt/"..name.."/installer.lua")
+		installer = require("/etc/mkapt/"..name.."/installer.lua")
+		print(installer.update())
+	end
 end
 
 if args[1] == "get" then -- The user want to recover an packet from packet server
-	os.execute("mkdir /etc/mkapt/"..args[2])
-	os.execute("wget https://github.com/Thorchlomo/Mkos/blob/main/etc/mkapt/"..args[2].."/installer.lua -f /etc/mkapt/"..args[2].."/installer.lua")
-	local installer = require("/etc/mkapt/"..args[2].."/installer.lua")
+	local source,name,version = read_source(args[2])
+	os.execute("mkdir /etc/mkapt/"..name)
+	os.execute("wget "..source..name.."/installer.lua -f /etc/mkapt/"..name.."/installer.lua")
+	local installer = require("/etc/mkapt/"..name.."/installer.lua")
 	print(installer.ver())
+	print(installer.install())
+	print(name.." "..version.."Is now installed !")
 end	
+
+if args[1] == "remove" then 
+	print("Removing "..args[2])
+	local installer = require("/etc/mkapt/"..args[2].."/installer.lua")
+	print(installer.remove())
 
 if args[1] == "update" then
 	print("Updating package list for the following source :",args[2])
@@ -58,6 +91,28 @@ if args[1] == "update" then
 	os.execute("wget "..args[2].." -f")
 end
 
+if args[1] == "upgrade" then
+	if args[2] == "*" then
+		print("Upgrading all packets")
+		for index, valeur in ipairs(get_all_packet()) do
+			print(valeur)
+			upgrade(valeur)
+		end
+	else
+		upgrade(args[2])
+	end
+end
+
+if args[1] == "add-src" then
+	os.execute("wget "..args[2].." /etc/mkapt/"..args[3]..".list")
+	print(args[3].." Added !")
+end
+
+if args[1] == "remove-src" then 
+	os.execute("rm /etc/mkapt/"..args[3])
+	print(args[3].." Removed !")
+end
+
 if args[1] == "debug" then
-	read_source()
+	read_source(args[2])
 end
