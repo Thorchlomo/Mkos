@@ -84,6 +84,7 @@ if args[1] == "remove" then
 	print("Removing "..args[2])
 	local installer = require("/etc/mkapt/"..args[2].."/installer.lua")
 	print(installer.remove())
+end
 
 if args[1] == "update" then
 	print("Updating package list for the following source :",args[2])
