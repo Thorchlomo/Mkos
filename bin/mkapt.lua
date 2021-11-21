@@ -22,15 +22,27 @@ if #args < 2 then
 end
 
 -- Start of the "main" code
-function read_source()
+function read_source(packet_query)
 	local config = {}
 	local p = io.popen('find "/etc/mkapt/" --type=f')  --Open directory look for files     
 	for file in p:lines() do                         --Loop through all files
 		print(file)       
 		table.insert(config, file)
 	end
-	return config
-
+	local lines = {}
+	for cle, chemin in ipairs(config) do -- Loop through all finded file
+		for line in io.lines(chemin) do  -- Loop through all lines of the specified file
+			lines[#lines + 1] = line
+		end
+		for index, valeur in ipairs(lines) do
+			if valeur == packet_query then
+				print("Finded the requested packet in the source :")
+				print(lines[1])
+				print("Packet : "..lines[index].." Version : "..lines[index+1])
+				return lines[1], lines[index], lines[index+1]
+			end
+		end
+	end
 end
 
 if args[1] == "get" then -- The user want to recover an packet from packet server
