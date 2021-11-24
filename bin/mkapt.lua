@@ -25,7 +25,7 @@ end
 -- Start of the "main" code
 function read_source(packet_query)
 	local config = {}
-	local p = io.popen('find "/etc/mkapt/" --type=f')  --Open directory look for files     
+	local p = io.popen('find "/etc/mkapt/" --type=f --name=*.list')  --Open directory look for files     
 	for file in p:lines() do                         --Loop through all files
 		print(file)       
 		table.insert(config, file)
@@ -49,7 +49,7 @@ end
 
 function get_all_packet()
 	local directorys = {}
-	local q = io.popen('find "/etc/mkapt" --type=d')
+	local q = io.popen('find "/etc/mkapt" --type=d ')
 	for directory in q:lines() do                         --Loop through all files
 		print(directory)
 		directorys[#directorys + 1] =  string.gsub(directory, "/etc/mkapt/", "")
@@ -60,13 +60,12 @@ end
 function upgrade(packet)
 	print("upgrading "..packet)
 	local source,name,version = read_source(packet)
-	local installer = require("/etc/mkapt/"..name.."/installer.lua")
-	if installer.version() == version then
+	package.path = package.path .. ";/etc/mkapt/"..name.."/installer.lua"
+	if version() == version then
 		print("Packet already up-to-date")
 	else
 		os.execute("wget "..source.."/"..name.."/installer.lua -f /etc/mkapt/"..name.."/installer.lua")
-		installer = require("/etc/mkapt/"..name.."/installer.lua")
-		print(installer.update())
+		print(update())
 	end
 end
 
@@ -74,16 +73,16 @@ if args[1] == "get" then -- The user want to recover an packet from packet serve
 	local source,name,version = read_source(args[2])
 	os.execute("mkdir /etc/mkapt/"..name)
 	os.execute("wget "..source.."/"..name.."/installer.lua -f /etc/mkapt/"..name.."/installer.lua")
-	local installer = require("/etc/mkapt/"..name.."/installer.lua")
-	print(installer.ver())
-	print(installer.install())
+	package.path = package.path .. ";/etc/mkapt/"..name.."/installer.lua"
+	print(ver())
+	print(install())
 	print(name.." "..version.."Is now installed !")
 end	
 
 if args[1] == "remove" then 
 	print("Removing "..args[2])
-	local installer = require("/etc/mkapt/"..args[2].."/installer.lua")
-	print(installer.remove())
+	package.path = package.path .. ";/etc/mkapt/"..args[2].."/installer.lua"
+	print(remove())
 end
 
 if args[1] == "update" then
