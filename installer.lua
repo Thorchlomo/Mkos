@@ -1,4 +1,5 @@
 local indev = false
+shell = require("shell")
 local args, options = shell.parse(...)
 
 if options[2] == "i" then
