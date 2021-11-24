@@ -85,7 +85,7 @@ if args[1] == "remove" then
 	print(remove())
 end
 
-if args[1] == "update" then
+if args[1] == "update" then --Don't work'
 	print("Updating package list for the following source :",args[2])
 	os.setenv("/etc/mkapt")
 	os.execute("wget "..args[2].." -f")
